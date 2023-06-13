@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaTrash, FaCheck } from "react-icons/fa";
+import Swal from 'sweetalert2';
 const AllTasks = () => {
     const [tasks, setTasks] = useState([]);
     const [update, setUpdate] = useState(0);
@@ -11,16 +12,33 @@ const AllTasks = () => {
     }, [update])
 
     const handleDelete = id => {
-        fetch(`http://localhost:5000/deleteATask/${id}`, {
-            method: 'DELETE'
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`http://localhost:5000/deleteATask/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount === 1) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Your file has been deleted.',
+                                'success'
+                            )
+                            const remaining = tasks.filter(task => task._id !== id);
+                            setTasks(remaining);
+                        }
+                    })
+            }
         })
-            .then(res => res.json())
-            .then(data => {
-                if (data.deletedCount === 1) {
-                    const remaining = tasks.filter(task => task._id !== id);
-                    setTasks(remaining);
-                }
-            })
     }
 
     const handleUpdate = id => {
@@ -58,7 +76,7 @@ const AllTasks = () => {
                             </div>
                             <hr />
                             <div className='flex justify-between items-center p-4'>
-                                <button onClick={() => handleUpdate(task._id)}><p className='text-[16px]'>{task.status === "Incomplete" ? "mark as completed" : <FaCheck></FaCheck>}</p></button>
+                                <button onClick={() => handleUpdate(task._id)}><p className='text-[16px]'>{task.status === "Incomplete" ? "mark as completed" : <FaCheck className='text-info' size={20}></FaCheck>}</p></button>
                                 <button onClick={() => handleDelete(task._id)}> <FaTrash className='text-red-500' size={20}></FaTrash> </button>
                             </div>
                         </div>
