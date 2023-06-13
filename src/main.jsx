@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Prime from './layout/Prime.jsx';
 import Home from './pages/home/Home.jsx';
 import AddTask from './pages/addTask/AddTask.jsx';
+import SeeMore from './pages/home/allTasks/seeMore/SeeMore';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,11 @@ const router = createBrowserRouter([
       {
         path: "/addTask",
         element: <AddTask></AddTask>
+      },
+      {
+        path: "/seeMore/:id",
+        element: <SeeMore></SeeMore>,
+        loader: ({ params }) => fetch(`http://localhost:5000/singleTasks/${params.id}`)
       }
     ]
   },

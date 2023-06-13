@@ -20,7 +20,8 @@ const AllTasks = () => {
                                 {
                                     task.details.length < 200 ? task.details :
                                         <div>{task.details.slice(0, 200)} <br />
-                                            <p className='text-end'><Link>read more</Link>
+                                            <p className='text-end'>
+                                                <Link to={`/seeMore/${task._id}`} className='text-blue-600 underline'>read more</Link>
                                             </p>
                                         </div>
                                 }
