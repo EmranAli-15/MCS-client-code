@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useLoaderData, useLocation } from 'react-router-dom';
-import useTitle from '../../../../hooks/useTitle';
+import useTitle from '../../hooks/useTitle';
 
 const SeeMore = () => {
     const data = useLoaderData();
@@ -14,7 +14,7 @@ const SeeMore = () => {
     useTitle('Details')
 
     return (
-        <div>
+        <div className='px-2 md:px-0'>
             <div className='my-12'>
                 <h1 className='text-lg md:text-3xl font-bold'>{title}</h1>
                 <p className='text-lg ml-2 mt-4'>{details}</p>

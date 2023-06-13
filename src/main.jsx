@@ -6,7 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Prime from './layout/Prime.jsx';
 import Home from './pages/home/Home.jsx';
 import AddTask from './pages/addTask/AddTask.jsx';
-import SeeMore from './pages/home/allTasks/seeMore/SeeMore';
+import SeeMore from './pages/seeMore/SeeMore';
 import ErrorPage from './pages/shared/ErrorPage';
 
 const router = createBrowserRouter([

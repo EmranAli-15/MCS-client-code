@@ -3,7 +3,7 @@ import AllTasks from './allTasks/AllTasks';
 import SideContent from './sideContent/SideContent';
 
 const Home = () => {
-useTitle('Home')
+    useTitle('Home')
     return (
         <div>
             <div className="grid md:grid-cols-12 gap-4">

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const Navbar = () => {
 
@@ -7,8 +7,6 @@ const Navbar = () => {
         <li><NavLink to="/" className={({ isActive }) => (isActive ? 'active' : '')}>Home</NavLink></li>
         <li><NavLink to="/addTask">Add Task</NavLink></li>
     </>
-
-// className={({ isActive }) => (isActive ? 'active' : '')}
 
     return (
         <div className="navbar bg-info rounded sticky top-0 z-10">
@@ -23,7 +21,9 @@ const Navbar = () => {
                         }
                     </ul>
                 </div>
-                <a className="btn btn-ghost normal-case text-xl">Knowledge</a>
+                <div className="btn btn-ghost normal-case text-xl">
+                    <Link to="/">Knowledge</Link>
+                </div>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="gap-x-4 menu-horizontal px-1">
@@ -33,7 +33,7 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                <button className="btn" disabled>Button</button>
             </div>
         </div>
     );
