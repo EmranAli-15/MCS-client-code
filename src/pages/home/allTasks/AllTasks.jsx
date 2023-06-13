@@ -1,14 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import { FaTrash, FaCheck } from "react-icons/fa";
 const AllTasks = () => {
     const [tasks, setTasks] = useState([]);
+    const [update, setUpdate] = useState(0);
     useEffect(() => {
         fetch('http://localhost:5000/allTasks')
             .then(res => res.json())
             .then(data => setTasks(data))
-    }, [])
+    }, [update])
 
+    const handleDelete = id => {
+        fetch(`http://localhost:5000/deleteATask/${id}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.deletedCount === 1) {
+                    const remaining = tasks.filter(task => task._id !== id);
+                    setTasks(remaining);
+                }
+            })
+    }
+
+    const handleUpdate = id => {
+        fetch(`http://localhost:5000/updateATask/${id}`, {
+            method: 'PATCH'
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data.modifiedCount === 1) {
+                    if (update === 0) {
+                        setUpdate(1);
+                    } else {
+                        setUpdate(0);
+                    }
+                }
+            })
+    }
     return (
         <div>
             {
@@ -25,6 +55,11 @@ const AllTasks = () => {
                                             </p>
                                         </div>
                                 }
+                            </div>
+                            <hr />
+                            <div className='flex justify-between items-center p-4'>
+                                <button onClick={() => handleUpdate(task._id)}><p className='text-[16px]'>{task.status === "Incomplete" ? "mark as completed" : <FaCheck></FaCheck>}</p></button>
+                                <button onClick={() => handleDelete(task._id)}> <FaTrash className='text-red-500' size={20}></FaTrash> </button>
                             </div>
                         </div>
                     </div>)

@@ -8,6 +8,12 @@ import Home from './pages/home/Home.jsx';
 import AddTask from './pages/addTask/AddTask.jsx';
 import SeeMore from './pages/home/allTasks/seeMore/SeeMore';
 
+import { QueryClient, QueryClientProvider, } from '@tanstack/react-query'
+
+// Create a client
+const queryClient = new QueryClient()
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -33,7 +39,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <div className='max-w-7xl mx-auto'>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </div>
   </React.StrictMode>,
 )
