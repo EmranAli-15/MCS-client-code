@@ -1,10 +1,30 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
+import Swal from 'sweetalert2';
 
 const AddTask = () => {
 
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const onSubmit = data => {
+        fetch('http://localhost:5000/addTasks', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    reset();
+                    Swal.fire({
+                        position: 'top',
+                        icon: 'success',
+                        title: 'Your task has been added',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                }
+            })
+    };
 
     return (
         <div className='px-4 md:w-2/3 mx-auto shadow-xl rounded-lg mt-12'>
