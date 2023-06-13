@@ -7,17 +7,13 @@ import Prime from './layout/Prime.jsx';
 import Home from './pages/home/Home.jsx';
 import AddTask from './pages/addTask/AddTask.jsx';
 import SeeMore from './pages/home/allTasks/seeMore/SeeMore';
-
-import { QueryClient, QueryClientProvider, } from '@tanstack/react-query'
-
-// Create a client
-const queryClient = new QueryClient()
-
+import ErrorPage from './pages/shared/ErrorPage';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Prime></Prime>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
@@ -39,9 +35,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <div className='max-w-7xl mx-auto'>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
+      <RouterProvider router={router} />
     </div>
   </React.StrictMode>,
 )

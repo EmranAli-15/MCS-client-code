@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link, useLoaderData, useLocation } from 'react-router-dom';
+import useTitle from '../../../../hooks/useTitle';
 
 const SeeMore = () => {
     const data = useLoaderData();
@@ -9,6 +10,8 @@ const SeeMore = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [location]);
+
+    useTitle('Details')
 
     return (
         <div>

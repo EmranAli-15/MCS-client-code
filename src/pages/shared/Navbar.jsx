@@ -11,7 +11,7 @@ const Navbar = () => {
 // className={({ isActive }) => (isActive ? 'active' : '')}
 
     return (
-        <div className="navbar bg-info rounded">
+        <div className="navbar bg-info rounded sticky top-0 z-10">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
