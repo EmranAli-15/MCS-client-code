@@ -26,7 +26,7 @@ const router = createBrowserRouter([
       {
         path: "/seeMore/:id",
         element: <SeeMore></SeeMore>,
-        loader: ({ params }) => fetch(`http://localhost:5000/singleTasks/${params.id}`)
+        loader: ({ params }) => fetch(`https://server-side-two-ashy.vercel.app/singleTasks/${params.id}`)
       }
     ]
   },

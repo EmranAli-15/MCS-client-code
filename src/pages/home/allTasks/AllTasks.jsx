@@ -7,7 +7,7 @@ const AllTasks = () => {
     const [update, setUpdate] = useState(0);
 
     useEffect(() => {
-        fetch('http://localhost:5000/allTasks')
+        fetch('https://server-side-two-ashy.vercel.app/allTasks')
             .then(res => res.json())
             .then(data => setTasks(data))
     }, [update])
@@ -23,7 +23,7 @@ const AllTasks = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                fetch(`http://localhost:5000/deleteATask/${id}`, {
+                fetch(`https://server-side-two-ashy.vercel.app/deleteATask/${id}`, {
                     method: 'DELETE'
                 })
                     .then(res => res.json())
@@ -43,7 +43,7 @@ const AllTasks = () => {
     }
 
     const handleUpdate = id => {
-        fetch(`http://localhost:5000/updateATask/${id}`, {
+        fetch(`https://server-side-two-ashy.vercel.app/updateATask/${id}`, {
             method: 'PATCH'
         })
             .then(res => res.json())

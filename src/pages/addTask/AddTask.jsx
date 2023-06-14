@@ -14,7 +14,7 @@ const AddTask = () => {
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const onSubmit = data => {
-        fetch('http://localhost:5000/addTasks', {
+        fetch('https://server-side-two-ashy.vercel.app/addTasks', {
             method: 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(data)
